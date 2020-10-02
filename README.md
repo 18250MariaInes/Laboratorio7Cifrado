@@ -22,7 +22,7 @@ Para parte Implementación con librería ejecutar
 $ python parte2.py
 ```
 
-### Demo Implementación sin librerias
+### Demo Implementación sin librerías
 [Video](https://youtu.be/jssTMgkr0xI)
 
 ### Demo Implementación con librería
