@@ -1,3 +1,7 @@
-# Laboratorio7Cifrado
+# Laboratorio 7 Cifrado de Información
 
-[VIDEO EXPLICATIVO]
+```shell
+$ pip install elgamal
+```
+
+
