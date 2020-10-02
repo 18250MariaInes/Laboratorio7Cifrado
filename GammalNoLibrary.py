@@ -10,9 +10,10 @@ Cifrado de información
 """
 import random  
 from math import pow
+import generate_prime as Prime
   
 a = random.randint(2, 10) 
-  
+
 def gcd(a, b): 
     if a < b: 
         return gcd(b, a) 
@@ -20,18 +21,20 @@ def gcd(a, b):
         return b; 
     else: 
         return gcd(b, a % b) 
-  
-# Generating large random numbers 
+
+
+# Se generan numeros grandes random
 def gen_key(q): 
   
-    key = random.randint(pow(10, 20), q) 
+    key = random.randint(10**20, q) 
     while gcd(q, key) != 1: 
-        key = random.randint(pow(10, 20), q) 
+        key = random.randint(10**20, q) 
   
     return key 
-  
-# Modular exponentiation 
-def power(a, b, c): 
+
+
+# Exponenciacion modular con 3 numeros 
+def powerMod(a, b, c): 
     x = 1
     y = a 
   
@@ -43,52 +46,53 @@ def power(a, b, c):
   
     return x % c 
   
-# Asymmetric encryption 
+# Encriptacion simetrica del mensaje con q, h y g 
 def encrypt(msg, q, h, g): 
   
     en_msg = [] 
   
-    k = gen_key(q)# Private key for sender 
-    s = power(h, k, q) 
-    p = power(g, k, q) 
+    k = gen_key(q)# la llave privada 
+    s = powerMod(h, k, q) #Se realiza la exponenciacion modular con h
+    p = powerMod(g, k, q) #Se realiza la exponenciacion modular con g
       
     for i in range(0, len(msg)): 
-        en_msg.append(msg[i]) 
+        en_msg.append(msg[i]) #se guarda msg caracter por caracter
   
-    print("g^k used : ", p) 
-    print("g^ak used : ", s) 
+    print("g**k usado : ", p) 
+    print("g**ak usadp : ", s) 
     for i in range(0, len(en_msg)): 
         en_msg[i] = s * ord(en_msg[i]) 
   
     return en_msg, p 
-  
+
+# Desencripcion del mensaje con p, la llave y q 
 def decrypt(en_msg, p, key, q): 
   
     dr_msg = [] 
-    h = power(p, key, q) 
+    h = powerMod(p, key, q) #Se realiza la exponenciacion modular
     for i in range(0, len(en_msg)): 
-        dr_msg.append(chr(int(en_msg[i]/h))) 
+        dr_msg.append(chr(int(en_msg[i]/h)))  #Se desencripta cada caracter el msg
           
     return dr_msg 
   
-# Driver code 
+# Se utilizan los metodos
 def main(): 
   
     msg = 'esto es facil de encriptar'
-    print("Original Message :", msg) 
+    print("Mensaje original :", msg) 
   
-    q = random.randint(pow(10, 20), pow(10, 50)) 
-    g = random.randint(2, q) 
+    q = random.randint(pow(10, 20), pow(10, 50)) # se genera q con numeros random grandes
+    g = random.randint(2, q) # se genera g en base a q
   
-    key = gen_key(q)# Private key for receiver 
-    h = power(g, key, q) 
-    print("g used : ", g) 
-    print("g^a used : ", h) 
+    key = gen_key(q)# se crea la llave privada
+    h = powerMod(g, key, q) #Se realiza la exponenciacion modular 
+    print("g usado : ", g) 
+    print("g**a usado : ", h) 
   
-    en_msg, p = encrypt(msg, q, h, g) 
-    dr_msg = decrypt(en_msg, p, key, q) 
-    dmsg = ''.join(dr_msg) 
-    print("Decrypted Message :", dmsg); 
+    en_msg, p = encrypt(msg, q, h, g) # se encripta el mensaje con q, h, g
+    dr_msg = decrypt(en_msg, p, key, q) # se desencripta el mensaje con p, la llave y q
+    dmsg = ''.join(dr_msg)  # se concatena el mensaje y se imprime
+    print("Mensaje Descifrado :", dmsg); 
   
   
 if __name__ == '__main__': 
