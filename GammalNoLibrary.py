@@ -43,6 +43,8 @@ def encrypt(msg, q, h, g):
     # q es p
     # h es K
     # g es g
+    #Cifrado
+    print("-----CIFRADO-----")
     en_msg = [] 
     
     # k es b
@@ -65,7 +67,8 @@ def encrypt(msg, q, h, g):
 
 # Desencripcion del mensaje con p, la llave y q 
 def decrypt(en_msg, p, key, q): 
-  
+    
+    print("-----DESCIFRADO-----")
     dr_msg = [] 
     h = powerMod(p, key, q) #Se realiza la exponenciacion modular
     for i in range(0, len(en_msg)): 
@@ -76,7 +79,7 @@ def decrypt(en_msg, p, key, q):
 # Se utilizan los metodos
 def main(): 
   
-    msg = 'esto es facil de encriptar'
+    msg = 'esto es facil de cifrar'
     print("Mensaje original :", msg) 
     # q es p
     q = getPrime(100) # se genera q con numeros random grandes
@@ -88,7 +91,7 @@ def main():
     h = powerMod(g, key, q) #Se realiza la exponenciacion modular 
     
     print("g usado : ", g)
-    print("La llave privada (a) de Alice es: ", a) 
+    print("La llave privada (key) de Alice es: ", key) 
     print("g**a usado : ", h) 
   
     en_msg, p = encrypt(msg, q, h, g) # se encripta el mensaje con q, h, g
