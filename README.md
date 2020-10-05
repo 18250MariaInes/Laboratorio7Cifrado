@@ -12,8 +12,7 @@ $ pip install pycryptodome
 Para la parte de Implementación sin librería ejecutar
 
 ```shell
-$ python server.py
-$ python client.py
+$ python GammalNoLibrary.py
 ```
 
 Para parte Implementación con librería ejecutar 
@@ -23,7 +22,7 @@ $ python parte2.py
 ```
 
 ### Demo Implementación sin librerías
-[Video](https://youtu.be/jssTMgkr0xI)
+[Video](https://youtu.be/KFidgiyUHD4)
 
 ### Demo Implementación con librería
 [Video](https://youtu.be/E4pfEPLF3no)
